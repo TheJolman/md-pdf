@@ -30,6 +30,7 @@ def main():
         prog="md-pdf",
         description="Convert markdown files to PDFs."
     )
+
     parser.add_argument(
         "input",
         type=str,
