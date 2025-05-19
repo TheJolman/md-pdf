@@ -7,9 +7,9 @@ from weasyprint import HTML, CSS
 
 
 def convert_markdown_to_pdf(
-    input_file: str, output_file: str, css_content: str | None = None
+    md_path: Path, pdf_path: Path, css_path: Path | None = None
 ) -> None:
-    with open(input_file, "r") as f:
+    with open(md_path, "r") as f:
         markdown_content = f.read()
 
     html_content = markdown.markdown(markdown_content)
@@ -26,9 +26,9 @@ def convert_markdown_to_pdf(
     </html>
     """
 
-    styles: list = [CSS(filename=css_content)] if css_content else []
+    styles: list = [CSS(filename=css_path)] if css_path else []
 
-    HTML(string=full_html).write_pdf(output_file, stylesheets=styles)
+    HTML(string=full_html).write_pdf(pdf_path, stylesheets=styles)
 
 
 def md_pdf():
@@ -66,7 +66,7 @@ def md_pdf():
     css_path = Path(args.css) if args.css else None
 
     try:
-        convert_markdown_to_pdf(str(input_path), str(output_path), css_path)
+        convert_markdown_to_pdf(input_path, output_path, css_path)
         print(f"Converted {input_path} to {output_path}")
     except Exception as e:
         print(f"Error converting markdown file: {e}")
