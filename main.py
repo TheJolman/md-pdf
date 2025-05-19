@@ -30,7 +30,6 @@ def main():
     parser.add_argument(
         "input",
         type=str,
-        default=None,
         help="filepath of markdown file to convert"
     )
 
@@ -38,14 +37,19 @@ def main():
         "-o",
         "--output",
         type=str,
-        default=None,
         help="specify the output path of the PDF file",
     )
 
     args = parser.parse_args()
-    if args.output:
-        input_file = "test.md"
-        convert_markdown_to_pdf(input_file, args.output)
+    if not args.input:
+        return
+
+    if not args.output:
+        output_file = f"{args.input[:-2]}pdf"
+    else:
+        output_file = args.output
+
+    convert_markdown_to_pdf(args.input, output_file)
 
 
 if __name__ == "__main__":
