@@ -52,34 +52,13 @@ def main():
     else:
         output_file = args.output
 
-    convert_markdown_to_pdf(args.input, output_file)
+    try:
+        convert_markdown_to_pdf(args.input, output_file)
+        print(f"Converted {args.input} to {output_file}")
+    except Exception as e:
+        print(f"Error converting markdown file: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
     main()
-    # argc = len(sys.argv)
-    # if argc not in [2, 3]:
-    #     print("Usage: ./compile input.md")
-    #     print("Or:    ./compile input.md output.pdf")
-    #     sys.exit(1)
-    #
-    # input_file = sys.argv[1]
-    #
-    # if len(input_file) < 4 or not input_file.endswith('.md'):
-    #     print("Invalid markdown file name")
-    #     sys.exit(1)
-    #
-    # if argc == 3:
-    #     output_file = sys.argv[2]
-    #     if len(output_file) < 5 or not output_file.endswith('.pdf'):
-    #         print("Invalid pdf file name")
-    #         sys.exit(1)
-    # else:
-    #     output_file = f"{input_file[:-2]}pdf"
-    #
-    # try:
-    #     convert_markdown_to_pdf(input_file, output_file)
-    #     print(f"Converted {input_file} to {output_file}")
-    # except Exception as e:
-    #     print(f"Error converting file: {str(e)}")
-    #     sys.exit(1)
