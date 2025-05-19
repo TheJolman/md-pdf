@@ -26,7 +26,10 @@ def convert_markdown_to_pdf(input_file, output_file):
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog="md-pdf",
+        description="Convert markdown files to PDFs."
+    )
     parser.add_argument(
         "input",
         type=str,
