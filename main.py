@@ -28,15 +28,24 @@ def convert_markdown_to_pdf(input_file, output_file):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        "input",
+        type=str,
+        default=None,
+        help="filepath of markdown file to convert"
+    )
+
+    parser.add_argument(
         "-o",
         "--output",
         type=str,
         default=None,
-        help="Specify the output path of the PDF file.",
+        help="specify the output path of the PDF file",
     )
+
     args = parser.parse_args()
     if args.output:
-        print("output flag used")
+        input_file = "test.md"
+        convert_markdown_to_pdf(input_file, args.output)
 
 
 if __name__ == "__main__":
