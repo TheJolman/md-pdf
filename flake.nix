@@ -7,29 +7,34 @@
   outputs = {
     self,
     nixpkgs,
-    flake-utils
+    flake-utils,
   }:
     flake-utils.lib.eachDefaultSystem (
       system: let
         # lib = nixpkgs.lib;
         pkgs = nixpkgs.legacyPackages.${system};
-        pythonPackages = "python313Packages";
+        python = pkgs.python313Packages;
 
-      in {
-        packages.default = pkgs.${pythonPackages}.buildPythonPackage {
+        md-pdf = python.buildPythonPackage {
           name = "md-pdf";
           version = "0.1.0";
           src = ./.;
           pyproject = true;
 
-          build-system = with pkgs.${pythonPackages}; [
+          build-system = with python; [
             hatchling
           ];
 
-          dependencies = with pkgs.${pythonPackages}; [
+          dependencies = with python; [
             markdown
             weasyprint
           ];
+        };
+      in {
+        packages.default = md-pdf;
+        apps.default = {
+          type = "app";
+          program = "${md-pdf}/bin/md-pdf";
         };
       }
     );
