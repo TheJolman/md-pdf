@@ -13,3 +13,6 @@ dependencies = [
     "markdown>=3.7",
     "weasyprint>=65.1",
 ]
+
+[project.scripts]
+md-pdf = "md_pdf.main:main"

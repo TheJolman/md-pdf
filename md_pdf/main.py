@@ -5,9 +5,7 @@ import markdown
 from weasyprint import HTML, CSS
 
 
-def md_pdf(
-    md_path: Path, pdf_path: Path, css_path: Path | None = None
-) -> None:
+def md_pdf(md_path: Path, pdf_path: Path, css_path: Path | None = None) -> None:
     with open(md_path, "r") as f:
         markdown_content = f.read()
 
@@ -30,7 +28,7 @@ def md_pdf(
     HTML(string=full_html).write_pdf(pdf_path, stylesheets=styles)
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(
         prog="md-pdf", description="Convert markdown files to PDFs."
     )
@@ -45,10 +43,7 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "-c",
-        "--css",
-        type=str,
-        help="specify the path of a CSS file to use"
+        "-c", "--css", type=str, help="specify the path of a CSS file to use"
     )
 
     args = parser.parse_args()
@@ -68,3 +63,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error converting markdown file: {e}")
         sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
