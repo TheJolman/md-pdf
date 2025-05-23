@@ -1,10 +1,15 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "md-pdf"
 version = "0.1.0"
-description = "Add your description here"
+description = "Markdown to PDF converter"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "markdown>=3.8",
+    "hatchling>=1.27.0",
+    "markdown>=3.7",
     "weasyprint>=65.1",
 ]
